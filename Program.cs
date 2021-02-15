@@ -21,13 +21,29 @@ namespace TestTask
                 Main(args);
             }
             char[] number = input.ToCharArray();
+            int[] digits = new int[number.Length];
             int[] newDigits = new int[number.Length + 1];
 
             //transfer from char array to integer array and prepend 0 if has odd number of digits 
             //catch if user entered a non-number symbols
             try
             {
-                if (number.Length != 4 || number.Length != 6 || number.Length != 8)
+                //if number of digits is not odd
+                if (number.Length == 4 || number.Length == 6 || number.Length == 8)
+                {
+                    for (int i = 0; i < digits.Length; i++)
+                    {
+                        digits[i] = int.Parse(number[i].ToString());
+                    }
+
+                    //sum of first half and sum of second half
+                    for (int i = 0; i < digits.Length / 2; i++)
+                        sum1 += digits[i];
+                    for (int i = digits.Length/2; i < digits.Length; i++)
+                        sum2 += digits[i];
+                }
+                //if number of digits is odd
+                else
                 {
                     for (int i = 0; i < newDigits.Length; i++)
                     {
@@ -36,6 +52,12 @@ namespace TestTask
                         else
                             newDigits[i] = int.Parse(number[i - 1].ToString());
                     }
+
+                    //sum of first half and sum of second half
+                    for (int i = 0; i < newDigits.Length / 2; i++)
+                        sum1 += newDigits[i];
+                    for (int i = newDigits.Length/2; i < newDigits.Length; i++)
+                        sum2 += newDigits[i];
                 }
             }
             catch
@@ -49,12 +71,6 @@ namespace TestTask
             //printAll(newDigits);
             //break;
             //-----------------------------------------------------//
-
-            //sum of first half and sum of second half
-            for (int i = 0; i < newDigits.Length / 2; i++)
-                sum1 += newDigits[i];
-            for (int i = newDigits.Length/2; i < newDigits.Length; i++)
-                sum2 += newDigits[i];
 
             //output result
             if (sum1 == sum2)
