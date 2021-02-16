@@ -20,7 +20,17 @@ namespace TestTask
                 Console.WriteLine("-------------------------------------------------------------");
                 Main(args);
             }
+
             char[] number = input.ToCharArray();
+            
+            //catch if user enter less than 4 or more than 8 digits
+            if(number.Length < 4 || number.Length > 8)
+            {
+                Console.WriteLine("Number must contain from 4 to 8 digits! Check it, and try again.");
+                Console.WriteLine("-------------------------------------------------------------");
+                Main(args);
+            }
+
             int[] digits = new int[number.Length];
             int[] newDigits = new int[number.Length + 1];
 
